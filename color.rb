@@ -13,15 +13,15 @@ module Color
     end
     
     def to_cmyk
-      temp     = []
-      temp[0]  = 1 - (r/255.0)
-      temp[1]  = 1 - (g/255.0)
-      temp[2]  = 1 - (b/255.0)
-      k = temp.min
-      c = (temp[0] - k) / (1 - k)
-      m = (temp[1] - k) / (1 - k)
-      y = (temp[2] - k) / (1 - k)
-      Color::CMYK.new(c,m,y,k)
+      cmy     = []
+      cmy[0]  = 1 - (r/255.0)
+      cmy[1]  = 1 - (g/255.0)
+      cmy[2]  = 1 - (b/255.0)
+      k = cmy.min
+      cmy.map! do |val|
+        (val - k) / (1 - k)
+      end
+      Color::CMYK.new(cmy[0],cmy[1],cmy[2],k)
     end
     
     def rgb
@@ -53,6 +53,10 @@ module Color
       g = temp * (1 - m) * 255;
       b = temp * (1 - y) * 255;
       Color::RGB.new(r.round,g.round,b.round)
+    end
+    
+    def cmyk
+      [c, m, y, k]
     end
     
     def cmyk=(cmyk)
