@@ -24,6 +24,10 @@ module Color
       Color::CMYK.new(cmy[0],cmy[1],cmy[2],k)
     end
     
+    def to_hex
+      "#%02x%02x%02x" % r, g, b
+    end
+    
     def rgb
       [r,g,b]
     end
@@ -61,6 +65,10 @@ module Color
     
     def cmyk=(cmyk)
       @cyan, @magenta, @yellow, @black = *cmyk
+    end
+    
+    def to_hex
+      to_rgb.to_hex
     end
     
   end
