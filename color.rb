@@ -25,7 +25,7 @@ module Color
     end
     
     def to_hex
-      "#%02x%02x%02x" % r, g, b
+      "#%02x%02x%02x" % [r, g, b]
     end
     
     def rgb
